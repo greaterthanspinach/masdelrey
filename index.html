@@ -1,0 +1,400 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Menu, X, MapPin, Phone, Mail, Clock, Check, 
+  Wifi, Coffee, Car, Waves, Sun, TreePine, 
+  ChevronRight, Play
+} from 'lucide-react';
+
+const App = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const rooms = [
+    {
+      id: 1,
+      title: "Apartment with Kitchen",
+      desc: "Spacious 4-person apartment featuring a private kitchen and large sun terrace.",
+      guests: 4,
+      image: "https://cdn.mytourist.cloud/rooms/medium/7629MTnHJCmvMPnyqCAEA1Vn0WIacyUThrdqIG34bbe5SDIG8sex0fYss7lDzlElDbe9v6.jpg"
+    },
+    {
+      id: 2,
+      title: "Ground Floor Cozy Room",
+      desc: "Inviting room located on the ground floor, opening up to a generous terrace.",
+      guests: 2,
+      image: "https://cdn.mytourist.cloud/rooms/medium/7978MTs6pZEU2sI8NDq2Ibv7ri4vs0qMUt7Don9msv0QIMxhuHZWKSleNiT2yNieFLrN0V.jpg"
+    },
+    {
+      id: 3,
+      title: "Spacious Retreat",
+      desc: "Expansive 40m² room with a luxurious bath and private terrace.",
+      guests: 4,
+      image: "https://cdn.mytourist.cloud/rooms/medium/7979MT7BdNazvxTPIG1W2pt0vrN3UF78BbIu58Kf83TIXjvh6G1zacR3IqPX7uctTlrSPn.jpg"
+    },
+    {
+      id: 4,
+      title: "Cozy Room with Bench",
+      desc: "Charming accommodations featuring a unique bed bench and private terrace.",
+      guests: 3,
+      image: "https://cdn.mytourist.cloud/rooms/medium/7983MTR7NPO4ZA4I3a52KP2eWwpzbgKwxzVXx4c6ikqJqFVjGUAgfqU3RoskMmK9ZNGbJJ.jpg"
+    },
+    {
+      id: 5,
+      title: "Charming Vista Room",
+      desc: "Elegant room offering beautiful panoramic views from your own terrace.",
+      guests: 2,
+      image: "https://cdn.mytourist.cloud/rooms/medium/7984MT9IWjqWt588fW7FE1BzL7xfAlxPMGA1GQKxHvAVPS1p5r9C2rhWMT8QMjA6m4SvQO.jpg"
+    },
+    {
+      id: 6,
+      title: "Colorful View Room",
+      desc: "Vibrant and lively room boasting spectacular views and outdoor seating.",
+      guests: 4,
+      image: "https://cdn.mytourist.cloud/rooms/medium/7985MTeIoI7ofjZTXHFchFSf2YWuPKxvMjV9xEWaxb3ruRTbr7rW3WBtr3ifzcpTw9jS5c.jpg"
+    }
+  ];
+
+  const galleryImages = [
+    "https://cdn.mytourist.cloud/webbuilder/gallery/1913MTURzeaqEc2bTn3rRTIvM2YxNzLotNDgIk4IX1SwqwvoFS0iEp0t9eeP72CLiLaM8l/large.jpg",
+    "https://cdn.mytourist.cloud/webbuilder/gallery/1913MTyJAXOCJhX5eJURMoHkbaA3BxEKxdq4sFfogS0ViipUcvnzBnRJDBnmFxAfyDtcOC/large.jpg",
+    "https://cdn.mytourist.cloud/webbuilder/gallery/1913MT6ghRf2kKO9VA1CigCdJOFkj1jroA6AFqhJBeo0qAHOpEJ4zIHBwMkOMsudKyUmV0/large.jpg",
+    "https://cdn.mytourist.cloud/webbuilder/slideshows/1913MTRV6by1Ag46tpHiyRtvEcWL6xhcLSwgGI1rduVe9CBvjoc7fkfYGHNKw2T8ge5BC2/medium.jpg"
+  ];
+
+  const facilities = [
+    { icon: <TreePine className="w-6 h-6" />, title: "Outside", items: ["Sun Terrace", "Lush Gardens", "Private Terraces"] },
+    { icon: <Waves className="w-6 h-6" />, title: "Wellness", items: ["Large Outdoor Pool", "Sunbeds & Parasols", "Lounge Area"] },
+    { icon: <Wifi className="w-6 h-6" />, title: "General", items: ["Free High-Speed Wi-Fi", "Personal Check-in", "Public Lounge & Fireplace"] },
+    { icon: <Car className="w-6 h-6" />, title: "Parking", items: ["Private Parking", "Disabled Access", "E-Bike Charging"] }
+  ];
+
+  return (
+    <div className="min-h-screen bg-stone-50 font-sans text-stone-800 selection:bg-stone-800 selection:text-stone-50">
+      
+      {/* NAVIGATION */}
+      <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-6'}`}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
+          <a href="#" className="flex items-center gap-3 z-50">
+            <img 
+              src="https://cdn.mytourist.cloud/corporate_identity/logos/5794MTiYxD9rNNevbY8s7gdsxZTFiITCqqMzTC.png" 
+              alt="Mas Del Rey Logo" 
+              className={`transition-all duration-500 ${isScrolled ? 'h-10' : 'h-12 brightness-0 invert'}`}
+            />
+          </a>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#about" className={`text-sm tracking-widest uppercase transition-colors hover:opacity-70 ${isScrolled ? 'text-stone-800' : 'text-white'}`}>About</a>
+            <a href="#accommodations" className={`text-sm tracking-widest uppercase transition-colors hover:opacity-70 ${isScrolled ? 'text-stone-800' : 'text-white'}`}>Rooms</a>
+            <a href="#facilities" className={`text-sm tracking-widest uppercase transition-colors hover:opacity-70 ${isScrolled ? 'text-stone-800' : 'text-white'}`}>Facilities</a>
+            <a href="#gallery" className={`text-sm tracking-widest uppercase transition-colors hover:opacity-70 ${isScrolled ? 'text-stone-800' : 'text-white'}`}>Gallery</a>
+            <a href="#contact" className={`px-6 py-3 text-sm tracking-widest uppercase transition-all duration-300 border ${isScrolled ? 'border-stone-800 text-stone-800 hover:bg-stone-800 hover:text-white' : 'border-white text-white hover:bg-white hover:text-stone-900'}`}>
+              Book Now
+            </a>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="md:hidden z-50"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? 
+              <X className={`w-8 h-8 ${isScrolled ? 'text-stone-800' : 'text-stone-800'}`} /> : 
+              <Menu className={`w-8 h-8 ${isScrolled ? 'text-stone-800' : 'text-white'}`} />
+            }
+          </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        <div className={`fixed inset-0 bg-stone-50 z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-500 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-stone-800">About</a>
+          <a href="#accommodations" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-stone-800">Accommodations</a>
+          <a href="#facilities" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-stone-800">Facilities</a>
+          <a href="#gallery" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-stone-800">Gallery</a>
+          <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-2xl font-serif text-stone-800">Contact</a>
+          <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="mt-8 px-8 py-4 bg-stone-800 text-white text-sm tracking-widest uppercase">Book Now</a>
+        </div>
+      </nav>
+
+      {/* HERO SECTION */}
+      <header className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0 bg-stone-900">
+          {/* Fallback Image */}
+          <img 
+            src="https://cdn.mytourist.cloud/webbuilder/slideshows/1913MTa4XH1oBUifJ1R2KSAOwke5JMxq9zrKOKqy5Joz6SRgAgyqKWOW8Yo39e8PnwUjrY/large.jpg" 
+            alt="Mas del Rey Exterior" 
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+          
+          {/* YouTube Video Background */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
+            <iframe 
+              src="https://www.youtube.com/embed/psLni-wCFLY?autoplay=1&mute=1&controls=0&loop=1&playlist=psLni-wCFLY&playsinline=1&rel=0&modestbranding=1"
+              className="absolute top-1/2 left-1/2 min-w-full min-h-full w-[300vw] h-[300vh] lg:w-[150vw] lg:h-[150vh] -translate-x-1/2 -translate-y-1/2"
+              frameBorder="0"
+              allow="autoplay; muted; encrypted-media"
+            ></iframe>
+          </div>
+          
+          {/* Overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-stone-900/40 z-20"></div>
+        </div>
+        
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center mt-20">
+          <span className="text-white/80 tracking-[0.3em] text-sm uppercase mb-6 block">Costa Del Azahar, Spain</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 leading-tight">
+            Feel at home, <br className="hidden md:block"/> and away.
+          </h1>
+          <p className="text-white/90 text-lg md:text-xl font-light max-w-2xl mx-auto mb-12">
+            An oasis of tranquility surrounded by fragrant orange groves, where authentic Spanish charm meets boutique luxury.
+          </p>
+          <a href="#accommodations" className="group flex items-center gap-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 transition-all duration-300">
+            <span className="text-sm tracking-widest uppercase">Explore Rooms</span>
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+      </header>
+
+      {/* ABOUT SECTION */}
+      <section id="about" className="py-24 lg:py-32 px-6 lg:px-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="relative">
+            <div className="aspect-[3/4] overflow-hidden rounded-sm">
+              <img 
+                src="https://cdn.mytourist.cloud/webbuilder/slideshows/1913MTtqC7XAKsbYW0hHEHtnkYqferxN3Fig51k5YFUt2QY7pRi7TNzxgRYEelV9Jh7kVP/medium.jpg" 
+                alt="Boutique Details" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-12 -right-12 w-2/3 aspect-square overflow-hidden rounded-sm border-8 border-stone-50 hidden md:block">
+              <img 
+                src="https://cdn.mytourist.cloud/corporate_identity/profile_pictures/5794MTlt1bowPu1tEgGQ3evihb1IrFpJ7GCozN.jpg" 
+                alt="Alijda and Bastien" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          
+          <div className="lg:pl-12">
+            <span className="text-stone-500 tracking-widest text-xs uppercase mb-4 block">Our Story</span>
+            <h2 className="text-4xl md:text-5xl font-serif mb-8 text-stone-900 leading-tight">
+              A Warm Welcome to <br/> Mas del Rey
+            </h2>
+            <div className="space-y-6 text-stone-600 font-light leading-relaxed">
+              <p>
+                Located on the sun-drenched Costa del Azahar, just eight kilometers from Benicarló and Vinaròs, our boutique B&B is a secluded haven surprisingly close to the Mediterranean sea.
+              </p>
+              <p>
+                We are Alijda and Bastien de Jong. We shared a common dream for a long time: to create a place where hospitality, tranquility, and a sense of belonging converge. In 2025, that dream became a reality when we fell in love with this beautiful, verdant region of authentic Spain.
+              </p>
+              <p>
+                Whether you seek a quiet retreat for two, a gathering place for friends, or an inspiring location for retreats, we ensure a relaxed, informal atmosphere combined with absolute privacy and that little bit of extra attention.
+              </p>
+            </div>
+            
+            <div className="mt-12 grid grid-cols-2 gap-8 pt-8 border-t border-stone-200">
+              <div>
+                <span className="block text-3xl font-serif text-stone-900 mb-2">16:00</span>
+                <span className="text-xs tracking-widest uppercase text-stone-500">Check-in from</span>
+              </div>
+              <div>
+                <span className="block text-3xl font-serif text-stone-900 mb-2">11:00</span>
+                <span className="text-xs tracking-widest uppercase text-stone-500">Check-out until</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ACCOMMODATIONS */}
+      <section id="accommodations" className="py-24 lg:py-32 px-6 lg:px-12 max-w-7xl mx-auto">
+        <div className="text-center mb-20">
+          <span className="text-stone-500 tracking-widest text-xs uppercase mb-4 block">Stay With Us</span>
+          <h2 className="text-4xl md:text-5xl font-serif text-stone-900">Our Accommodations</h2>
+          <p className="mt-6 text-stone-600 font-light max-w-2xl mx-auto">
+            Six uniquely decorated rooms, each equipped with a private bathroom and terrace. Experience ultimate comfort with breathtaking views of the Spanish countryside.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 gap-y-16">
+          {rooms.map((room) => (
+            <div key={room.id} className="group cursor-pointer">
+              <div className="relative aspect-[4/5] overflow-hidden mb-6 rounded-sm">
+                <img 
+                  src={room.image} 
+                  alt={room.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-stone-900/0 group-hover:bg-stone-900/20 transition-colors duration-500"></div>
+              </div>
+              <div className="flex justify-between items-start mb-3">
+                <h3 className="text-2xl font-serif text-stone-900">{room.title}</h3>
+              </div>
+              <p className="text-stone-600 font-light text-sm mb-4 line-clamp-2">{room.desc}</p>
+              <div className="flex items-center justify-between border-t border-stone-200 pt-4">
+                <span className="text-xs tracking-widest uppercase text-stone-500 flex items-center gap-2">
+                  Up to {room.guests} Guests
+                </span>
+                <span className="text-sm tracking-widest uppercase text-stone-900 border-b border-transparent group-hover:border-stone-900 transition-colors">
+                  View Details
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FACILITIES */}
+      <section id="facilities" className="py-24 bg-stone-200/50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-serif text-stone-900 mb-6">Exceptional Facilities</h2>
+            <p className="text-stone-600 font-light max-w-2xl mx-auto">Everything you need for a restorative and carefree holiday.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            {facilities.map((facility, idx) => (
+              <div key={idx} className="bg-white p-8 border border-stone-100 shadow-sm rounded-sm transition-transform hover:-translate-y-1 duration-300">
+                <div className="text-stone-800 mb-6">
+                  {facility.icon}
+                </div>
+                <h3 className="text-xl font-serif text-stone-900 mb-6">{facility.title}</h3>
+                <ul className="space-y-4">
+                  {facility.items.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-stone-600 font-light text-sm">
+                      <Check className="w-4 h-4 text-stone-400 mt-0.5 shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* GALLERY GRID */}
+      <section id="gallery" className="py-24 lg:py-32 max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+          <div>
+            <span className="text-stone-500 tracking-widest text-xs uppercase mb-4 block">Visual Journey</span>
+            <h2 className="text-4xl md:text-5xl font-serif text-stone-900">Photo Gallery</h2>
+          </div>
+          <a href="#" className="hidden md:inline-block text-sm tracking-widest uppercase text-stone-900 border-b border-stone-900 pb-1 hover:text-stone-500 hover:border-stone-500 transition-colors">
+            View All Images
+          </a>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="aspect-square md:aspect-[3/4] overflow-hidden rounded-sm">
+             <img src={galleryImages[0]} alt="Gallery 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"/>
+          </div>
+          <div className="grid grid-rows-2 gap-4">
+            <div className="aspect-video md:aspect-auto overflow-hidden rounded-sm">
+              <img src={galleryImages[1]} alt="Gallery 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"/>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="overflow-hidden rounded-sm">
+                <img src={galleryImages[2]} alt="Gallery 3" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"/>
+              </div>
+              <div className="overflow-hidden rounded-sm">
+                <img src={galleryImages[3]} alt="Gallery 4" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT / CTA */}
+      <section id="contact" className="py-24 bg-stone-900 text-stone-50">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div>
+            <span className="text-stone-400 tracking-widest text-xs uppercase mb-4 block">Get in Touch</span>
+            <h2 className="text-4xl md:text-5xl font-serif mb-8">Plan Your Escape</h2>
+            <p className="text-stone-400 font-light mb-12 max-w-md leading-relaxed">
+              We look forward to welcoming you to Mas del Rey. For inquiries, group bookings, or special requests, please don't hesitate to contact us.
+            </p>
+            
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <MapPin className="w-6 h-6 text-stone-500 shrink-0" />
+                <p className="text-stone-300 font-light">
+                  Poligono 1, parcela 363<br/>
+                  12580 Benicarlo, Spain
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <Phone className="w-6 h-6 text-stone-500 shrink-0" />
+                <div className="text-stone-300 font-light flex flex-col">
+                  <a href="tel:+34631609290" className="hover:text-white transition-colors">+34 631 60 92 90</a>
+                  <a href="tel:+31614132945" className="hover:text-white transition-colors">+31 614 13 29 45</a>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <Mail className="w-6 h-6 text-stone-500 shrink-0" />
+                <a href="mailto:info@masdelrey.com" className="text-stone-300 font-light hover:text-white transition-colors">info@masdelrey.com</a>
+              </div>
+            </div>
+          </div>
+          
+          <div className="bg-white text-stone-800 p-8 md:p-12 rounded-sm shadow-xl">
+            <h3 className="text-2xl font-serif mb-8">Send a Message</h3>
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-xs tracking-widest uppercase text-stone-500 mb-2">Name</label>
+                  <input type="text" className="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-800 bg-transparent transition-colors" />
+                </div>
+                <div>
+                  <label className="block text-xs tracking-widest uppercase text-stone-500 mb-2">Phone</label>
+                  <input type="text" className="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-800 bg-transparent transition-colors" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs tracking-widest uppercase text-stone-500 mb-2">Email Address</label>
+                <input type="email" className="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-800 bg-transparent transition-colors" />
+              </div>
+              <div>
+                <label className="block text-xs tracking-widest uppercase text-stone-500 mb-2">Message</label>
+                <textarea rows="4" className="w-full border-b border-stone-300 py-2 focus:outline-none focus:border-stone-800 bg-transparent transition-colors resize-none"></textarea>
+              </div>
+              <button type="button" className="w-full bg-stone-900 text-white py-4 tracking-widest text-sm uppercase hover:bg-stone-800 transition-colors">
+                Send Inquiry
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-stone-950 text-stone-400 py-12 text-center text-sm font-light">
+        <div className="max-w-7xl mx-auto px-6">
+          <img 
+            src="https://cdn.mytourist.cloud/corporate_identity/logos/5794MTiYxD9rNNevbY8s7gdsxZTFiITCqqMzTC.png" 
+            alt="Mas Del Rey Logo" 
+            className="h-12 mx-auto mb-8 brightness-0 invert opacity-50"
+          />
+          <div className="flex flex-wrap justify-center gap-8 mb-8 uppercase tracking-widest text-xs">
+            <a href="#" className="hover:text-white transition-colors">Terms & Conditions</a>
+            <a href="#" className="hover:text-white transition-colors">House Rules</a>
+            <a href="#" className="hover:text-white transition-colors">Cancellation</a>
+          </div>
+          <p className="mb-2">&copy; {new Date().getFullYear()} Mas del Rey Boutique B&B. All rights reserved.</p>
+          <p className="text-xs text-stone-600">Generalitat Valencia ARCS-726 en ARCS-729 | Chamber of commerce: B26608836</p>
+        </div>
+      </footer>
+
+    </div>
+  );
+};
+
+export default App;
